@@ -19,22 +19,34 @@ Build on Ubuntu following these steps:
     $ cmake ..
     $ make
 
+Build on Fedora following these steps:
+
+    $ git clone --recursive git@github.com:twodee/madeup.git
+    $ cd madeup
+    $ mkdir build
+    $ cd build
+    $ sudo dnf install cmake eigen3-devel CGAL-devel ImageMagick-c++-devel gtest-devel
+    $ cmake ..
+    $ make
+
 If you accidentally omitted the `--recursive` option when cloning, follow these steps to get the submodules cloned:
 
     $ git submodule init
     $ git submodule update
 
-## Building the Tests
+That should clone the helper library 'twodee' and 'open-simplex-noise'. If it did not work, you can clone the repository manually and link it to Madeup as follows:
 
-First you'll need the Google Test library. These instructions install it for a single user:
-
-    $ git clone https://github.com/google/googletest.git
-    $ cd googletest
-    $ mkdir build
-    $ cd build
-    $ cmake -DCMAKE_INSTALL_PREFIX=. ..
-    $ make
-    $ make install
+   $ git clone https://github.com/smcameron/open-simplex-noise-in-c.git
+   $ cd madeup
+   $ ln -s ../open-simplex-noise-in-c open-simplex-noise-in-c
+   $ cd ..
+   $ git clone https://github.com/twodee/twodee.git
+   $ cd madeup
+   $ ln -s ../twodee twodee
+   $ cd ..
+   $ git clone https://github.com/libigl/libigl.git
+   $ cd madeup
+   $ ln -s ../libigl/ libigl
 
 ## Building the Web Client
 To build and run the web client locally, you'll also need PHP and Ruby installed.
