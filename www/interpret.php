@@ -5,17 +5,18 @@ error_reporting(E_ALL);
 function to_bytes($val) {
   $val = trim($val);
   $last = strtolower($val[strlen($val) - 1]);
+  $val_bytes = intval(substr($val , 0, strlen($val) - 1));
 
   switch($last) {
     case 'g':
-      $val *= 1024;
+      $val_bytes *= 1024;
     case 'm':
-      $val *= 1024;
+      $val_bytes *= 1024;
     case 'k':
-      $val *= 1024;
+      $val_bytes *= 1024;
   }
 
-  return $val;
+  return $val_bytes;
 }
 
 if (isset($_REQUEST['source'])) {
