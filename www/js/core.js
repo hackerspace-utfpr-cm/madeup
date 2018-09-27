@@ -1135,6 +1135,7 @@ function pathify() {
 
 function solidify() {
   run(getSource(), GeometryMode.SURFACE);
+  //snapshotTask = setTimeout(recordSnapshot, 2 * 1000);
 }
 
 function toggleGearMenu() {
@@ -1251,9 +1252,9 @@ function onSourceChanged() {
     clearTimeout(snapshotTask); 
   }
 
-  if (lesson != null && isSnapshot) {
-    snapshotTask = setTimeout(recordSnapshot, 2 * 1000);
-  }
+
+    //snapshotTask = setTimeout(recordSnapshot, 2 * 1000);
+
 }
 
 function recordSnapshot() {
@@ -1262,11 +1263,12 @@ function recordSnapshot() {
     url: 'snapshot.php',
     data: JSON.stringify({
       source: getSource(),
-      lesson: lesson,
+      /*lesson: lesson,*/
       id: sessionID
     }),
     contentType: 'application/json; charset=utf-8',
     success: function(data) {
+      console.log("snapshot criado");
     },
     error: function(e) {
       console.log(e);
@@ -1637,9 +1639,13 @@ function run(source, mode, pingback) {
     log('Pathifying...'); 
   }
 
+
+
   timeOfLatestRun = new Date().getTime();
 
   interpret({
+    id: sessionID,
+    lesson: lesson,
     timestamp: timeOfLatestRun,
     source: source,
     extension: 'json',
@@ -1889,6 +1895,7 @@ function onInterpret(data) {
     generateLines();
 
     render();
+    snapshotTask = setTimeout(recordSnapshot, 2 * 1000);
   } else if (data['exit_status'] == 22) {
     log(data['stdout'] + '\nYour model was taking a long time to build. It felt like it was never going to finish! So, I stopped trying. Sorry.');
   } else {

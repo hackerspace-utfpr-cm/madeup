@@ -44,6 +44,9 @@ if (isset($_REQUEST['source'])) {
 //   timestamp: Time request submitted.
 $out = array();
 $out['timestamp'] = $in['timestamp'];
+$out['id'] = $in['id'];
+$out['lesson'] = $in['lesson'];
+$out['source'] = $in['source'];
 
 // The interpreter checks that shading_mode and geometry_mode are legal.
 // But we should check that the output path is legal -- that the extension
@@ -132,6 +135,17 @@ if (strcmp($in['extension'], 'json') != 0 &&
     }
     $json = json_encode($out);
     echo $json;
+  }
+
+  if(($out['exit_status']==0) && ($out['geometry_mode']=="SURFACE" && ($out['stdout']==""))){
+    date_default_timezone_set('America/Sao_Paulo');
+    $timestamp = date('d_m_Y_H_i_s');
+
+    $outpath = sprintf("/var/www/madeup/saves/%s_model.json", $timestamp);
+    $jsonData = json_encode($out);
+    file_put_contents($outpath, $jsonData);
+
+    include 'count.php';
   }
 
   // Clean up the temporary files we created for the interpreter.
