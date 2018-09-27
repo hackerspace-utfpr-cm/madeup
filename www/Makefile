@@ -1,7 +1,7 @@
 JS = $(addprefix js/,text_to_blocks.js core.js keystrokes.js)
 CSS = $(addprefix css/,ide_skin.css ide_skin_dark.css ide_skin_light.css)
 IMAGES = $(addprefix images/,favicon-16x16.png favicon-32x32.png pathify_icon.png solidify_icon.png fit.png gear.png close.png)
-SRC = forn index.php translate.php save.php snapshot.php interpret.php index.html bridge.js $(JS) $(CSS) $(IMAGES)
+SRC = forn index.php translate.php save.php snapshot.php interpret.php count.php index.html bridge.js $(JS) $(CSS) $(IMAGES)
 DST = $(addprefix $(WWW_ROOT)/, $(SRC))
 DEPS = ace gapi.js three-js jquery.js js-cookie jquery-ui blockly closure-library filesaver jquery_ui_touch_punch mousetrap meshline
 JQUERY_UI_VERSION = 1.12.1
@@ -122,6 +122,10 @@ $(WWW_ROOT)/images:
 $(WWW_ROOT)/repos:
 	mkdir $@
 	chmod g+rX $@
+
+$(WWW_ROOT)/saves:
+	mkdir $@
+	chmod 777 $@
 
 $(DST): $(WWW_ROOT)/%: % $(WWW_ROOT)/js $(WWW_ROOT)/css $(WWW_ROOT)/images $(WWW_ROOT)/repos
 	echo $(SUDO) cp $* $@
