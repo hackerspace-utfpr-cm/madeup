@@ -127,7 +127,7 @@ $(WWW_ROOT)/saves:
 	mkdir $@
 	chmod 777 $@
 
-$(DST): $(WWW_ROOT)/%: % $(WWW_ROOT)/js $(WWW_ROOT)/css $(WWW_ROOT)/images $(WWW_ROOT)/repos
+$(DST): $(WWW_ROOT)/%: % $(WWW_ROOT)/js $(WWW_ROOT)/css $(WWW_ROOT)/images $(WWW_ROOT)/repos $(WWW_ROOT)/saves
 	echo $(SUDO) cp $* $@
 	$(SUDO) cp $* $@
 	$(SUDO) chmod g+rX $@
