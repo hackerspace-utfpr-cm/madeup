@@ -145,6 +145,8 @@ if (strcmp($in['extension'], 'json') != 0 &&
     $jsonData = json_encode($out);
     file_put_contents($outpath, $jsonData);
 
+    $SESSIONID = $out['id'];
+    include 'createTable.php';
     include 'count.php';
   }
 
