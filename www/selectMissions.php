@@ -1,6 +1,6 @@
 <?php
 
-require_once 'database.php';
+require_once('database.php');
 
 $db = new MyDB();
 if (!$db) {
