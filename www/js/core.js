@@ -1895,12 +1895,42 @@ function onInterpret(data) {
     generateLines();
 
     render();
+    
+    if(data['score'] != null){ 
+      txtScore = "Score: ";
+      strScore = data['score'];
+      document.getElementById("score").innerHTML = txtScore + strScore;
+    }
+    if(data['missions'][0]==1){
+      document.getElementById("modalText").innerHTML = "Missão concluída: Primeiro objeto criado!";
+      if(data['missions'][1]==1){
+        document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando laços!";
+        if(data['missions'][2]==1){
+          document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando condicionais!";
+          if(data['missions'][3]==1){
+            document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando variaveis globais!";
+            if(data['missions'][4]==1){
+              document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando subtração de objetos!";
+              if(data['missions'][5]==1){
+                document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando todos os conceitos!";
+              }
+            }
+          }
+        }
+      }
+      document.getElementById("myModal").style.display = "block";
+      modalTask = setTimeout(modalNone, 3 * 1000);
+    }
     snapshotTask = setTimeout(recordSnapshot, 2 * 1000);
   } else if (data['exit_status'] == 22) {
     log(data['stdout'] + '\nYour model was taking a long time to build. It felt like it was never going to finish! So, I stopped trying. Sorry.');
   } else {
     log(sansDebug);
   }
+}
+
+function modalNone(){
+  document.getElementById("myModal").style.display = "none";
 }
 
 function getLineMesh(lineEssence) {

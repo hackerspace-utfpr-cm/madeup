@@ -81,6 +81,28 @@
   <!-- /Minified -->
 
   <script>if (window.module) module = window.module;</script>
+  <style>
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 75%;
+      top: 0;
+      width: 25%; /* Full width */
+      height: 50%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+    } 
+
+  /* Modal Content */
+  .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+  }  
+  </style>
 </head>
 
 <body>
@@ -97,6 +119,10 @@
   </div>
 
   <div id="glcanvas">
+    <div id="score" height="60">Score: 0</div>
+    <div id="myModal" class="modal">
+      <div id="modalText" class="modal-content">Missões Concluidas</div>
+    </div>
     <div id="toolbar">
       <div class="quick-button" id="pathify-button" title="Pathify"><img src="images/pathify_icon.png" class="unselectable"></div>
       <div class="quick-button" id="solidify-button" title="Solidify"><img src="images/solidify_icon.png" class="unselectable"></div>
