@@ -16,8 +16,8 @@ Build on Ubuntu following these steps:
     $ mkdir build
     $ cd build
     $ sudo apt-get install cmake libeigen3-dev libcgal-dev libmagick++-dev
-    $ cmake ..
-    $ make
+    $ cmake -DCMAKE_BUILD_TYPE=Release ..
+    $ make 
 
 Build on Fedora following these steps:
 
@@ -26,7 +26,7 @@ Build on Fedora following these steps:
     $ mkdir build
     $ cd build
     $ sudo dnf install cmake eigen3-devel CGAL-devel ImageMagick-c++-devel gtest-devel
-    $ cmake ..
+    $ cmake -DCMAKE_BUILD_TYPE=Release ..
     $ make
 
 If you accidentally omitted the `--recursive` option when cloning, follow these steps to get the submodules cloned:
@@ -34,7 +34,7 @@ If you accidentally omitted the `--recursive` option when cloning, follow these 
     $ git submodule init
     $ git submodule update
 
-That should clone the helper libraries 'twodee', 'open-simplex-noise' and 'libgl'. If it did not work, you can clone the repository manually and link it to Madeup as follows:
+That should clone the helper library 'twodee', 'open-simplex-noise' and 'libgl'. If it did not work, you can clone the repository manually and link it to Madeup as follows:
 
    $ git clone https://github.com/smcameron/open-simplex-noise-in-c.git
    $ cd madeup
