@@ -10,7 +10,6 @@ MINIFIED_DEPS = $(addprefix $(WWW_ROOT)/,deps.min.js mode-madeup.js theme-twilig
 DOCS = $(addprefix $(WWW_ROOT)/,$(wildcard docs/html/*.html) $(wildcard docs/html/images/*))
 
 DST_BINARIES = $(WWW_ROOT)/$(notdir $(MERP))
-missionmissionmission
 .PHONY: madeup check
 
 all: check $(DST) $(WWW_ROOT)/docs/html $(WWW_ROOT)/docs/html/images $(DOCS) $(DOCIMAGES) $(WWW_ROOT)/repos/ace/src-noconflict/mode-madeup.js $(DST_BINARIES) $(MINIFIED_DEPS)
