@@ -1697,7 +1697,7 @@ function onInterpret(data) {
     log(sansDebug);
     
     if (data.geometry_mode == GeometryMode.SURFACE) {
-      var loader = new THREE.JSONLoader();
+      var loader = new THREE.LegacyJSONLoader();
       try {
         var model = loader.parse(JSON.parse(data['model'].replace(/NaN/gi, 0)));
 
