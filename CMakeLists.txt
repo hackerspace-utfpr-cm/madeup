@@ -5,7 +5,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
 
 include_directories(${CMAKE_BINARY_DIR}/include twodee/include)
 
-option(USE_DEBUG "Enable debug information" ON)
+option(USE_DEBUG "Enable debug information" OFF)
 
 if (APPLE)
   set(WWW_ROOT "/Library/WebServer/Documents" CACHE STRING "Directory in which to install web resources")
@@ -26,7 +26,7 @@ if (USE_MAGICK)
   endif(IMAGEMAGICK_FOUND)
 endif(USE_MAGICK)
 
-if (USE_DEBUG AND CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   set(CMAKE_C_FLAGS "-pedantic -Wall -Wno-keyword-macro -std=c99")
   set(CMAKE_CXX_FLAGS "-pedantic -Wall -Wno-keyword-macro -std=c++11")
 
