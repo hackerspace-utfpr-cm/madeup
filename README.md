@@ -34,7 +34,7 @@ If you accidentally omitted the `--recursive` option when cloning, follow these 
     $ git submodule init
     $ git submodule update
 
-That should clone the helper library 'twodee' and 'open-simplex-noise'. If it did not work, you can clone the repository manually and link it to Madeup as follows:
+That should clone the helper libraries 'twodee', 'open-simplex-noise' and 'libgl'. If it did not work, you can clone the repository manually and link it to Madeup as follows:
 
    $ git clone https://github.com/smcameron/open-simplex-noise-in-c.git
    $ cd madeup
