@@ -46,7 +46,7 @@ var snapshotTask = undefined;
 var settings = new Settings();
 var lastBlocks = null;
 var badModelMessage = 'Uh oh. I tried to generate a model for you, but it is broken. This can happen for a bunch of reasons: some faces may be too small, some vertices may be duplicated, and the mesh boolean operations may just be fickle.';
-var isAutoSolidify = false;
+var runZeroMode = null;
 var axes = [null, null, null];
 
 function hasWebGL() {
@@ -178,19 +178,6 @@ var onMouseDown = (function() {
 
   return onMouseDown;
 })();
-
-// Warn on leaving the page if there are unsaved changes. Downloading triggers
-// this, even though we're not leaving the page, so we add a special flag to
-// filter out these events.
-window.addEventListener('beforeunload', function(e) {
-  if (!isDownloading && mup.isDirty && needsUnsavedPrompt()) {
-    var message = 'You have unsaved changes. Throw them away?';
-    e.returnValue = message;
-    return message;
-  } else if (isDownloading) {
-    isDownloading = false;
-  }
-});
 
 THREE.Object3D.prototype.clear = function() {
   var children = this.children;
@@ -618,17 +605,17 @@ $(window).on('load', function() {
   });
 
   // Only save cookies if they were successfully loaded.
-  $(window).on('unload', function() {
-    syncSettings();
-    if (mup.isDirty && confirm('Save changes to ' + mup.name + ' before leaving?')) {
-      save();
-    }
-  });
+  // $(window).on('beforeunload', function() {
+    // syncSettings();
+    // if (mup.isDirty && confirm('Save changes to ' + mup.name + ' before leaving?')) {
+      // save();
+    // }
+  // });
 
   platformize();
  
   // Showing gear menu?
-  if (!lesson && settings.has('showGearMenu') && settings.get('showGearMenu')) {
+  if (!lesson && settings.has('showGearMenu') && settings.get('showGearMenu') && !isEmbedded) {
     showGearMenu();
   }
 
@@ -644,8 +631,8 @@ $(window).on('load', function() {
     textEditor.setValue(source0, 1);
   }
 
-  if (isAutoSolidify) {
-    run(getSource(), GeometryMode.SURFACE, fit);
+  if (runZeroMode) {
+    run(getSource(), runZeroMode == 'solidify' ? GeometryMode.SURFACE : GeometryMode.PATH, fit);
   }
 
   $('#smaller').click(decreaseFontSize);
@@ -1574,7 +1561,7 @@ function load(newMup) {
       // Wipe away variables that aren't in use. Blockly used to do this
       // automatically. We only do this on load, as removing variables during a
       // coding session can lead to unwanted surprises.
-      blocklyWorkspace.updateVariableStore(true);
+      // blocklyWorkspace.updateVariableStore(true);
 
       // But the builtin variables should always be around.
       ensureBuiltinVariables();
@@ -2400,4 +2387,8 @@ function docify() {
       }
     });
   });
+}
+
+function onPossibleClose() {
+  return mup.isDirty;
 }

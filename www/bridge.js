@@ -185,24 +185,33 @@ function platformPromptForSaveAs(onSuccess) {
   });
 }
 
+function fetchPage(mups, nextPageToken) {
+  return gapi.client.drive.files.list({
+    q: "'" + driveDirectory.id + "' in parents and trashed = false",
+    pageSize: 100,
+    pageToken: nextPageToken,
+    fields: "nextPageToken, files(id, name, modifiedTime)"
+  }).then(function(response) {
+    var files = response.result.files;
+    if (files && files.length > 0) {
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        mups.push(new Mup(file.name, Date.parse(file.modifiedTime), file.id));
+      }
+    }
+
+    if (response.result.nextPageToken) {
+      return fetchPage(mups, response.result.nextPageToken);
+    } else {
+      return mups;
+    }
+  });
+}
+
 function populateMupsList() {
   var promise = null;
   if (isGoogled) {
-    promise = gapi.client.drive.files.list({
-      q: "'" + driveDirectory.id + "' in parents and trashed = false",
-      pageSize: 10,
-      fields: "nextPageToken, files(id, name, modifiedTime)"
-    }).then(function(response) {
-      var files = response.result.files;
-      var mups = [];
-      if (files && files.length > 0) {
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          mups.push(new Mup(file.name, Date.parse(file.modifiedTime), file.id));
-        }
-      }
-      return mups;
-    });
+    promise = fetchPage([], null);
   } else {
     promise = new Promise(function(resolve, reject) {
       var mups = [];
@@ -334,7 +343,10 @@ $(document).ready(function() {
 
 var CLIENT_ID = '1044882582652-7g4d00clc613n2ahn48neumroauv7tu2.apps.googleusercontent.com';
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-var SCOPES = 'https://www.googleapis.com/auth/drive.file';
+var SCOPES = [
+  'https://www.googleapis.com/auth/drive',
+  'https://www.googleapis.com/auth/drive.file',
+].join(' ');
 var isGoogled = false;
 var driveDirectory = null;
 
@@ -378,12 +390,20 @@ function updateGoogleStatus(isConnected) {
 		$('#googleLogin').text('Use local storage');
     $('#archiver').hide();
     $('#storageDrive').prop('checked', true);
-		isGoogled = true;
-		appFolder().then(listGoogleMups);
+		appFolder().then(function(parentDirectory) {
+      isGoogled = true;
+      driveDirectory = parentDirectory;
+      populateMupsList();
+    }, function() {
+      isGoogled = false;
+      updateGoogleStatus(false);
+    });
 	} else {
     // Signing out seems to mean something different than I expect. We want to
     // completely disconnect from Google Drive when we're doing local storage.
-    gapi.auth2.getAuthInstance().disconnect();
+    if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+      gapi.auth2.getAuthInstance().disconnect();
+    }
 
 		$('#googleLogin').text('Use Google Drive');
     $('#archiver').show();
@@ -391,11 +411,6 @@ function updateGoogleStatus(isConnected) {
 		isGoogled = false;
 		populateMupsList();
 	}
-}
-
-function listGoogleMups(parentDirectory) {
-  driveDirectory = parentDirectory;
-  populateMupsList();
 }
 
 function appFolder() {
@@ -415,3 +430,18 @@ function appFolder() {
     }
   });
 }
+
+// Warn on leaving the page if there are unsaved changes. Downloading triggers
+// this, even though we're not leaving the page, so we add a special flag to
+// filter out these events.
+window.addEventListener('beforeunload', function(e) {
+  syncSettings();
+
+  if (!isDownloading && mup.isDirty) {
+    var message = 'You have unsaved changes. Throw them away?';
+    e.returnValue = message;
+    return message;
+  } else if (isDownloading) {
+    isDownloading = false;
+  }
+});
