@@ -15,7 +15,7 @@ Build on Ubuntu following these steps:
     $ cd madeup
     $ mkdir build
     $ cd build
-    $ sudo apt-get install cmake libeigen3-dev libcgal-dev libmagick++-dev
+    $ sudo apt-get install cmake libeigen3-dev libcgal-dev libmagick++-dev uglify-js
     $ cmake -DCMAKE_BUILD_TYPE=Release ..
     $ make 
 
@@ -25,7 +25,7 @@ Build on Fedora following these steps:
     $ cd madeup
     $ mkdir build
     $ cd build
-    $ sudo dnf install cmake eigen3-devel CGAL-devel ImageMagick-c++-devel gtest-devel
+    $ sudo dnf install cmake eigen3-devel CGAL-devel ImageMagick-c++-devel gtest-devel uglify-js
     $ cmake -DCMAKE_BUILD_TYPE=Release ..
     $ make
 
