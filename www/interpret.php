@@ -1,5 +1,5 @@
 <?php
-
+require_once('database.php');
 error_reporting(E_ALL);
 
 function to_bytes($val) {
@@ -48,7 +48,7 @@ $out['id'] = $in['id'];
 $out['lesson'] = $in['lesson'];
 $out['source'] = $in['source'];
 
-
+$db = new MyDB();
 
 // The interpreter checks that shading_mode and geometry_mode are legal.
 // But we should check that the output path is legal -- that the extension
@@ -137,19 +137,21 @@ if (strcmp($in['extension'], 'json') != 0 &&
       if(($out['geometry_mode']=="SURFACE" && ($out['stdout']==""))){
         date_default_timezone_set('America/Sao_Paulo');
         $timestamp = date('d_m_Y_H_i_s');
-
-        $outpath = sprintf(__DIR__ . '/saves/%s_model.json', $timestamp);
+    
+        $outpath = sprintf("/var/www/madeup/saves/%s_model.json", $timestamp);
         $jsonData = json_encode($out);
         file_put_contents($outpath, $jsonData);
     
         $SESSIONID = $out['id'];
-        include 'createTable.php';
-        include 'count.php';               
+        $db->selectPlayer($SESSIONID);
+        include 'count.php';             
 
         $Player_ID = $out['id'];
         include 'selectUnique.php';
+        include 'selectAchiviments.php';
         $out['missions'] = $missions_array;
         $out['score'] = $scorePlayer;
+        $db->close();
       }
     }
     $json = json_encode($out);

@@ -2,11 +2,6 @@
    require_once('database.php');
    
    $db = new MyDB();
-   if(!$db) {
-      //echo $db->lastErrorMsg();
-   } else {
-      //echo "Opened database successfully\n";
-   }
 
    $smt = $db->prepare('SELECT * from PLAYERS where SESSIONID=:sessionid');
    $smt->bindValue(':sessionid', $Player_ID, SQLITE3_TEXT);
@@ -20,11 +15,6 @@
    $db->close();
 
    $db = new MyDB();
-   if(!$db) {
-      //echo $db->lastErrorMsg();
-   } else {
-      //echo "Opened database successfully\n";
-   }
 
    $smt = $db->prepare('SELECT * from ACTIONS where PLAYERS_ID=:playersid');
    $smt->bindValue(':playersid', $aux_id, SQLITE3_TEXT);
