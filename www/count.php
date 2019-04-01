@@ -1,4 +1,7 @@
 <?php
+require_once('dbMissions.php');
+$dbM = New MissionsDB();
+
 $qty_commands = array("move" => 0, "moveto" => 0, "yaw" => 0, "pitch" => 0, "roll" => 0, "if" => 0, "repeat" => 0, "while" => 0, "for" => 0, "box" => 0, "boxes" => 0, "dowel" => 0, "extrude" => 0, "revolve" => 0, "sphere" => 0, "spheres" => 0, "tube" => 0, "transform" => 0, ".radius" => 0, ".innerRadius" => 0, "outerRadius" => 0, ".rgb" => 0, "nsides" => 0, "pi" => 0);
 $commands = array_keys($qty_commands);
 
@@ -83,6 +86,7 @@ $countpath = sprintf("/var/www/madeup/saves/%s_count.json", $timestamp);
 $json_b = json_encode($obj);
 file_put_contents($countpath, $json_b);
 
-include 'selectMissions.php';
+//include 'selectMissions.php';
+$dbM->selectMissions($SESSIONID, $flag_loop, $flag_if, $flag_global, $flag_subtrac, $flag_full);
 
 ?>

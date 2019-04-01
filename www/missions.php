@@ -3,14 +3,8 @@
 require_once('database.php');
 
 $db = new MyDB();
-if (!$db) {
-    //echo $db->lastErrorMsg();
-} else {
-    //echo "Opened database successfully\n";
-}
 $smt = $db->prepare('SELECT * from ACTIONS where PLAYERS_ID=:id');
 $smt->bindValue(':id', $PLAYER_ID, SQLITE3_TEXT);
-
 
 $ret = $smt->execute();
 while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
