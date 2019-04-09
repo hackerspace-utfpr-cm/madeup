@@ -24,6 +24,8 @@ EOF;
 
       function __construct() {
          $this->open('test.db');
+         $this->busyTimeout(5000);
+         $this->exec('PRAGMA journal_mode = wal;');
          if(!$this->exec($this->sqlCreate)){
             //echo $this->lastErrorMsg();
          } else {
@@ -39,11 +41,6 @@ EOF;
          $smt->bindValue(':players_id', $this->ID, SQLITE3_INTEGER);
 
          $ret = $smt->execute();
-         if (!$ret) {
-            //echo $this->lastErrorMsg();
-         } else {
-            //echo "Records created successfully\n";
-         }
       }
 
       function insertPlayer($SESSIONID){

@@ -151,7 +151,6 @@ if (strcmp($in['extension'], 'json') != 0 &&
         include 'selectAchiviments.php';
         $out['missions'] = $missions_array;
         $out['score'] = $scorePlayer;
-        $db->close();
       }
     }
     $json = json_encode($out);
@@ -168,5 +167,6 @@ if (strcmp($in['extension'], 'json') != 0 &&
   }
 }
 
+$db->close();
 error_log("Results: " . json_encode($out));
 ?>

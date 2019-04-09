@@ -86,7 +86,8 @@ $countpath = sprintf("/var/www/madeup/saves/%s_count.json", $timestamp);
 $json_b = json_encode($obj);
 file_put_contents($countpath, $json_b);
 
-//include 'selectMissions.php';
 $dbM->selectMissions($SESSIONID, $flag_loop, $flag_if, $flag_global, $flag_subtrac, $flag_full);
+
+$dbM->close();
 
 ?>

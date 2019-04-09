@@ -7,6 +7,8 @@
             } else {
                 //echo "Table created successfully\n";
             }
+            //$this->busyTimeout(5000);
+            //$this->exec('PRAGMA journal_mode = wal;');
         }
 
         public $flag_loop;
@@ -15,7 +17,7 @@
         public $flag_subtrac;
         public $flag_full;
 
-        function mission($SESSIONID, $POINTS){
+        function mission($SESSIONID, $POINTS, $MISSION){
             $smt = $this->prepare('SELECT * from PLAYERS where SESSIONID=:sessionid');
             $smt->bindValue(':sessionid', $SESSIONID, SQLITE3_TEXT);
 
@@ -29,14 +31,10 @@
             $smt->bindValue(':score', $var_score, SQLITE3_INTEGER);
 
             $ret = $smt->execute();
-            if(!$ret) {
-            //echo $this->lastErrorMsg();
-            } else {
-            //echo $this->changes(), " Record updated successfully\n";
-            }
             
-            $smt = $this->prepare('UPDATE ACTIONS set ISCOMPLETE=1 WHERE ACTIONID=1 AND TYPE="mission" AND PLAYERS_ID=:players_id');
+            $smt = $this->prepare('UPDATE ACTIONS set ISCOMPLETE=1 WHERE ACTIONID=:mission AND TYPE="mission" AND PLAYERS_ID=:players_id');
             $smt->bindValue(':players_id', $players_id, SQLITE3_TEXT);
+            $smt->bindValue(':mission', $MISSION, SQLITE3_TEXT);
             $ret = $smt->execute();
         }
 
@@ -46,25 +44,31 @@
 
             $ret = $smt->execute();
             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
-            if (($row['ACTIONID'] == 1) && ($row['ISCOMPLETE'] == 0)) {
-                include 'mission1.php';
-            } else {
-                if (($row['ACTIONID'] == 2) && ($row['ISCOMPLETE'] == 0) && ($this->flag_loop == 1)) {
-                        include 'mission2.php';
+                if (($row['ACTIONID'] == 1) && ($row['ISCOMPLETE'] == 0)) {
+                    $this->mission($SESSIONID, 50, 1);
+                    break;
+                } else {
+                    if (($row['ACTIONID'] == 2) && ($row['ISCOMPLETE'] == 0) && ($this->flag_loop == 1)) {
+                        $this->mission($SESSIONID, 100, 2);
+                        break;
+                    }
+                    if (($row['ACTIONID'] == 3) && ($row['ISCOMPLETE'] == 0) && ($this->flag_if == 1)) {
+                        $this->mission($SESSIONID, 150, 3);
+                        break;
+                    }
+                    if (($row['ACTIONID'] == 4) && ($row['ISCOMPLETE'] == 0) && ($this->flag_global == 1)) {
+                        $this->mission($SESSIONID, 200, 4);
+                        break;
+                    }
+                    if (($row['ACTIONID'] == 5) && ($row['ISCOMPLETE'] == 0) && ($this->flag_subtrac == 1)) {
+                        $this->mission($SESSIONID, 250, 5);
+                        break;
+                    }
+                    if (($row['ACTIONID'] == 6) && ($row['ISCOMPLETE'] == 0) && ($this->flag_full == 1)) {
+                        $this->mission($SESSIONID, 250, 6);
+                        break;
+                    }
                 }
-                if (($row['ACTIONID'] == 3) && ($row['ISCOMPLETE'] == 0) && ($this->flag_if == 1)) {
-                        include 'mission3.php';
-                }
-                if (($row['ACTIONID'] == 4) && ($row['ISCOMPLETE'] == 0) && ($this->flag_global == 1)) {
-                        include 'mission4.php';
-                }
-                if (($row['ACTIONID'] == 5) && ($row['ISCOMPLETE'] == 0) && ($this->flag_subtrac == 1)) {
-                        include 'mission5.php';
-                }
-                if (($row['ACTIONID'] == 6) && ($row['ISCOMPLETE'] == 0) && ($this->flag_full == 1)) {
-                        include 'mission6.php';
-                }
-            }
             }
         }
 
@@ -83,8 +87,7 @@
             //echo "ID = ". $row['ID'] . "\n";
             //echo "SCORE = ". $row['SCORE'] ."\n";
             $PLAYER_ID = $row['ID'];
-            include 'missions.php';
-            //$this->missions($PLAYER_ID, $SESSIONID);
+            $this->missions($PLAYER_ID, $SESSIONID);
         }
     }
 ?>
