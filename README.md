@@ -36,17 +36,17 @@ If you accidentally omitted the `--recursive` option when cloning, follow these 
 
 That should clone the helper library 'twodee', 'open-simplex-noise' and 'libgl'. If it did not work, you can clone the repository manually and link it to Madeup as follows:
 
-   $ git clone https://github.com/smcameron/open-simplex-noise-in-c.git
-   $ cd madeup
-   $ ln -s ../open-simplex-noise-in-c open-simplex-noise-in-c
-   $ cd ..
-   $ git clone https://github.com/twodee/twodee.git
-   $ cd madeup
-   $ ln -s ../twodee twodee
-   $ cd ..
-   $ git clone https://github.com/libigl/libigl.git
-   $ cd madeup
-   $ ln -s ../libigl/ libigl
+    $ git clone https://github.com/smcameron/open-simplex-noise-in-c.git
+    $ cd madeup
+    $ ln -s ../open-simplex-noise-in-c open-simplex-noise-in-c
+    $ cd ..
+    $ git clone https://github.com/twodee/twodee.git
+    $ cd madeup
+    $ ln -s ../twodee twodee
+    $ cd ..
+    $ git clone https://github.com/libigl/libigl.git
+    $ cd madeup
+    $ ln -s ../libigl/ libigl
 
 ## Building the Web Client
 To build and run the web client locally, you'll also need PHP and Ruby installed.
