@@ -31,6 +31,8 @@
   </script>
 
   <!-- Blockly dependencies -->
+
+  <!-- Unminified -->
   <script src="repos/blockly/blockly_uncompressed.js"></script>
   <script src="repos/blockly/msg/js/en.js"></script>
   <script src="repos/blockly/blocks/logic.js"></script>
@@ -43,8 +45,18 @@
   <script src="repos/blockly/blocks/procedures.js"></script>
   <script src="repos/blockly/blocks/madeup.js"></script>
   <script src="repos/blockly/generators/madeup.js"></script>
+  <!-- /Unminified -->
+
+  <!-- Minified -->
+  <!-- <script src="repos/blockly/blockly_compressed.js"></script> -->
+  <!-- <script src="repos/blockly/msg/js/en.js"></script> -->
+  <!-- <script src="repos/blockly/blocks_compressed.js"></script> -->
+  <!-- <script src="repos/blockly/madeup_compressed.js"></script> -->
+  <!-- /Minified -->
 
   <!-- Other dependencies -->
+
+  <!-- Unminified -->
   <script src="repos/jquery.js"></script>
   <script src="repos/jquery-ui/jquery-ui.js"></script>
   <script src="repos/js-cookie/src/js.cookie.js"></script>
@@ -53,9 +65,8 @@
   <script src="repos/three-js/build/three.js"></script>
   <script src="repos/three-js/examples/js/controls/TrackballControls.js"></script>
   <script src="repos/three-js/examples/js/utils/SceneUtils.js"></script>
-  <script src="repos/three-js/examples/js/loaders/deprecated/LegacyJSONLoader.js"></script>
   <script src="repos/meshline/src/THREE.MeshLine.js"></script>
-  <script src="repos/filesaver/dist/FileSaver.min.js"></script>
+  <script src="repos/filesaver/src/FileSaver.js"></script>
   <script src="repos/ace/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/text_to_blocks.js"></script>
   <script src="js/keystrokes.js"></script>
@@ -63,6 +74,11 @@
   <script src="js/core.js"></script>
   <script src="repos/gapi.js"></script>
   </script>
+  <!-- /Unminified -->
+
+  <!-- Minified -->
+  <!-- <script src="deps.min.js"></script> -->
+  <!-- /Minified -->
 
   <script>if (window.module) module = window.module;</script>
   <style>
@@ -126,6 +142,27 @@
         <div class="panel-section-content doccopy"></div>
       </li>
 
+      <li id="panel-section-objects">
+        <span class="panel-section-label unselectable">Objects</span>
+        <div class="panel-section-content doccopy">
+          <div>
+            <legend>Nome do usuario</legend>
+            <img src="images/object1.png" style="width:60%;height:60%;">
+          </div>
+          <div>
+            <legend>Nome do usuario</legend>
+            <img src="images/object1.png" style="width:60%;height:60%;">
+          </div>
+          <div>
+            <legend>Nome do usuario</legend>
+            <img src="images/object1.png" style="width:60%;height:60%;">
+          </div>
+          <div>
+            <legend>Nome do usuario</legend>
+            <img src="images/object1.png" style="width:60%;height:60%;">
+          </div>
+        </div>
+      </li>
       <li id="panel-section-file">
         <span class="panel-section-label unselectable">File</span>
         <div class="panel-section-content">
@@ -368,7 +405,7 @@
 
 <form id="breakout-form" action="https://madeup.xyz" method="post" target="_blank">
   <input name="src" type="hidden">
-  <input name="runZeroMode" type="hidden" value="solidify">
+  <input name="runonload" type="hidden" value="true">
   <input name="embed" type="hidden" value="false">
 </form>
 
