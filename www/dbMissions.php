@@ -2,13 +2,13 @@
     class MissionsDB extends SQLite3 {
         function __construct() {
             $this->open('test.db');
+            //$this->busyTimeout(5000);
+            //$this->exec('PRAGMA journal_mode = wal;');
             if(!$this->exec($this->sqlCreate)){
                 //echo $this->lastErrorMsg();
             } else {
                 //echo "Table created successfully\n";
             }
-            //$this->busyTimeout(5000);
-            //$this->exec('PRAGMA journal_mode = wal;');
         }
 
         public $flag_loop;
@@ -48,7 +48,7 @@
                     $this->mission($SESSIONID, 50, 1);
                     break;
                 } else {
-                    if (($row['ACTIONID'] == 2) && ($row['ISCOMPLETE'] == 0) && ($this->flag_loop == 1)) {
+                    if (($row['ACTIONID'] == 2) && ($row['ISCOMPLETE'] == 0) && ($this->flag_global == 1)) {
                         $this->mission($SESSIONID, 100, 2);
                         break;
                     }
@@ -56,7 +56,7 @@
                         $this->mission($SESSIONID, 150, 3);
                         break;
                     }
-                    if (($row['ACTIONID'] == 4) && ($row['ISCOMPLETE'] == 0) && ($this->flag_global == 1)) {
+                    if (($row['ACTIONID'] == 4) && ($row['ISCOMPLETE'] == 0) && ($this->flag_loop == 1)) {
                         $this->mission($SESSIONID, 200, 4);
                         break;
                     }
