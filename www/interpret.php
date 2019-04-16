@@ -148,7 +148,6 @@ if (strcmp($in['extension'], 'json') != 0 &&
 
         $Player_ID = $out['id'];
         include 'selectUnique.php';
-        include 'selectAchiviments.php';
         $out['missions'] = $missions_array;
         $out['score'] = $scorePlayer;
       }
