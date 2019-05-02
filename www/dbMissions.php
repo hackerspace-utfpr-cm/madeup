@@ -32,7 +32,7 @@
 
             $ret = $smt->execute();
             
-            $smt = $this->prepare('UPDATE ACTIONS set ISCOMPLETE=1 WHERE ACTIONID=:mission AND TYPE="mission" AND PLAYERS_ID=:players_id');
+            $smt = $this->prepare('UPDATE ACTIONS set ISCOMPLETE=1 WHERE MISSIONNUMBER=:mission AND TYPE="mission" AND PLAYERS_ID=:players_id');
             $smt->bindValue(':players_id', $players_id, SQLITE3_TEXT);
             $smt->bindValue(':mission', $MISSION, SQLITE3_TEXT);
             $ret = $smt->execute();
@@ -44,27 +44,27 @@
 
             $ret = $smt->execute();
             while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
-                if (($row['ACTIONID'] == 1) && ($row['ISCOMPLETE'] == 0)) {
+                if (($row['MISSIONNUMBER'] == 1) && ($row['ISCOMPLETE'] == 0)) {
                     $this->mission($SESSIONID, 50, 1);
                     break;
                 } else {
-                    if (($row['ACTIONID'] == 2) && ($row['ISCOMPLETE'] == 0) && ($this->flag_global == 1)) {
+                    if (($row['MISSIONNUMBER'] == 2) && ($row['ISCOMPLETE'] == 0) && ($this->flag_global == 1)) {
                         $this->mission($SESSIONID, 100, 2);
                         break;
                     }
-                    if (($row['ACTIONID'] == 3) && ($row['ISCOMPLETE'] == 0) && ($this->flag_if == 1)) {
+                    if (($row['MISSIONNUMBER'] == 3) && ($row['ISCOMPLETE'] == 0) && ($this->flag_if == 1)) {
                         $this->mission($SESSIONID, 150, 3);
                         break;
                     }
-                    if (($row['ACTIONID'] == 4) && ($row['ISCOMPLETE'] == 0) && ($this->flag_loop == 1)) {
+                    if (($row['MISSIONNUMBER'] == 4) && ($row['ISCOMPLETE'] == 0) && ($this->flag_loop == 1)) {
                         $this->mission($SESSIONID, 200, 4);
                         break;
                     }
-                    if (($row['ACTIONID'] == 5) && ($row['ISCOMPLETE'] == 0) && ($this->flag_subtrac == 1)) {
+                    if (($row['MISSIONNUMBER'] == 5) && ($row['ISCOMPLETE'] == 0) && ($this->flag_subtrac == 1)) {
                         $this->mission($SESSIONID, 250, 5);
                         break;
                     }
-                    if (($row['ACTIONID'] == 6) && ($row['ISCOMPLETE'] == 0) && ($this->flag_full == 1)) {
+                    if (($row['MISSIONNUMBER'] == 6) && ($row['ISCOMPLETE'] == 0) && ($this->flag_full == 1)) {
                         $this->mission($SESSIONID, 250, 6);
                         break;
                     }

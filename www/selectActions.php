@@ -20,6 +20,7 @@ while ($row = $ret->fetchArray(SQLITE3_ASSOC)) {
     }
     echo "   -TYPE = " . $row['TYPE'] . "\n";
     echo "    ACTIONID = " . $row['ACTIONID'] . "\n";
+    echo "    MISSIONNUMBER = " . $row['MISSIONNUMBER'] . "\n";
     echo "    ISCOMPLETE = " . $row['ISCOMPLETE'] . "\n----------------------------\n";
 }
 echo "Operation done successfully\n";
