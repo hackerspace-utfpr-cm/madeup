@@ -966,11 +966,6 @@ $(window).on('load', function() {
     focusEditor();
   });
 
-  $('#privacy').click(function() {
-    window.open('privacy', '_blank');
-    focusEditor();
-  });
-
   $('#magic').click(function() {
     var source = getSource();
     sendToChris(source);
@@ -1898,9 +1893,22 @@ function onInterpret(data) {
       modelScene.add(meshes[mi]);
     }
     generateLines();
-
     render();
     
+    renderer.domElement.toBlob(function(blob) {
+      var formData = new FormData();
+      formData.append('image', blob);
+      formData.append('name', sessionID);
+      console.log(formData.get('name'));
+      saveScreenshot(formData, 
+        function(formData) {
+          console.log('Success');
+        }, function(errorMessage) {
+          console.log('Failure. :(');
+        }
+        );
+    });
+
     if(data['score'] != null){ 
       txtScore = "Score: ";
       strScore = data['score'];
@@ -1932,6 +1940,25 @@ function onInterpret(data) {
   } else {
     log(sansDebug);
   }
+}
+
+function voteObject(){
+
+}
+
+function setVoteList() {
+  var user = 'Usuario1';
+  var image = 'images/object1.png';
+  var text = '<legend>';
+  text += user;
+  text += '</legend>';
+  text += '<br><img src="';
+  text += image;
+  text += '" width="60%" height="60%">';
+  text += '<br><button type="button" onclick="voteObject(';
+  text += user;
+  text += ');">Like</button>';
+  document.getElementById("list_users").innerHTML = text;
 }
 
 function modalNone(){
