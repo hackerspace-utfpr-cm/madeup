@@ -48,6 +48,7 @@ var lastBlocks = null;
 var badModelMessage = 'Uh oh. I tried to generate a model for you, but it is broken. This can happen for a bunch of reasons: some faces may be too small, some vertices may be duplicated, and the mesh boolean operations may just be fickle.';
 var isAutoSolidify = false;
 var axes = [null, null, null];
+var missionDone = [0,0,0,0,0,0];
 
 function hasWebGL() {
   try {
@@ -1895,19 +1896,20 @@ function onInterpret(data) {
     generateLines();
     render();
     
-    renderer.domElement.toBlob(function(blob) {
-      var formData = new FormData();
-      formData.append('image', blob);
-      formData.append('name', sessionID);
-      console.log(formData.get('name'));
-      saveScreenshot(formData, 
-        function(formData) {
-          console.log('Success');
-        }, function(errorMessage) {
-          console.log('Failure. :(');
-        }
-        );
-    });
+    if(data['geometry_mode']=='SURFACE'){
+      renderer.domElement.toBlob(function(blob) {
+        var formData = new FormData();
+        formData.append('image', blob);
+        formData.append('name', sessionID);
+        saveScreenshot(formData, 
+          function(formData) {
+            console.log('Success');
+          }, function(errorMessage) {
+            console.log('Failure. :(');
+          }
+          );
+      });
+    }
 
     if(data['score'] != null){ 
       txtScore = "Score: ";
@@ -1920,6 +1922,7 @@ function onInterpret(data) {
         document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando variaveis globais!";
         if(data['missions'][2]==1){
           document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando condicionais!";
+          missionDone[2] = 1;
           if(data['missions'][3]==1){
             document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando laços!";
             if(data['missions'][4]==1){
@@ -1942,23 +1945,48 @@ function onInterpret(data) {
   }
 }
 
-function voteObject(){
-
+function voteObject(user){
+  document.getElementById(user).disabled = true;
+  var formData = new FormData();
+  formData.append('name', user);
+  $.ajax({
+    type: 'POST',
+    url: 'vote.php',
+    data: formData,
+    contentType: false,
+    cache: false,
+    processData:false, 
+    success: function(msg){
+      alert("Voto registrado com sucesso");
+      console.log(msg);
+    },
+    error: function(){
+      alert("Falha ao registrar voto");
+    },
+  });
 }
 
-function setVoteList() {
-  var user = 'Usuario1';
-  var image = 'images/object1.png';
-  var text = '<legend>';
-  text += user;
-  text += '</legend>';
-  text += '<br><img src="';
-  text += image;
-  text += '" width="60%" height="60%">';
-  text += '<br><button type="button" onclick="voteObject(';
-  text += user;
-  text += ');">Like</button>';
-  document.getElementById("list_users").innerHTML = text;
+function getListVote(){
+  $.get('getListUser.php',function(data){
+    var json = JSON.parse(data);
+    var text = '';
+    for(var i = 0; i < json.length; i++){
+      var user = json[i];
+      if(user != sessionID){
+        var image = 'saves/'+ json[i] +'.png';
+        text += '<div><legend>';
+        text += user;
+        text += '</legend>';
+        text += '<br><img class="imgObj" src="';
+        text += image;
+        text += '">';
+        text += `<br><button id='${user}' type="button" onclick="voteObject('${user}');">Like</button></div>`;
+      }
+    }
+
+    document.getElementById("list_users").innerHTML = text;
+
+  });
 }
 
 function modalNone(){

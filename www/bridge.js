@@ -27,30 +27,6 @@ function saveScreenshot(data, onSuccess, onError) {
   });
 }
 
-function getListVote(){
-  $.get('getListUser.php',function(data){
-    var json = JSON.parse(data);
-    var text = '';
-    for(var i = 0; i < json.length; i++){
-      var user = json[i];
-      var image = 'saves/'+ json[i] +'.png';
-      text += '<div><legend>';
-      text += user;
-      text += '</legend>';
-      text += '<br><img class="imgObj" src="';
-      text += image;
-      text += '">';
-      text += '<br><button type="button" onclick="voteObject(';
-      text += user;
-      text += ');">Like</button></div>';
-      console.log(image);
-    }
-
-    document.getElementById("list_users").innerHTML = text;
-
-  });
-}
-
 function textToAbstractSyntaxTree(text, onSuccess, onError) {
   $.ajax({
     type: 'POST',
