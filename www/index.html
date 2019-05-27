@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Madeup</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="google-signin-client_id" content="1044882582652-7g4d00clc613n2ahn48neumroauv7tu2.apps.googleusercontent.com">
+  <meta name="google-signin-client_id"
+    content="1044882582652-7g4d00clc613n2ahn48neumroauv7tu2.apps.googleusercontent.com">
 
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit">
-  <link rel="stylesheet" href="repos/jquery-ui/jquery-ui.css"/>
+  <link rel="stylesheet" href="repos/jquery-ui/jquery-ui.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/2.2.1/pretty.min.css"/>
-  <link rel="stylesheet" href="css/ide_skin.css"/>
-  <link rel="stylesheet" href="css/ide_skin_dark.css" title="theme"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretty-checkbox/2.2.1/pretty.min.css" />
+  <link rel="stylesheet" href="css/ide_skin.css" />
+  <link rel="stylesheet" href="css/saves.css" />
+  <link rel="stylesheet" href="css/ide_skin_dark.css" title="theme" />
 
-  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+  <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
   <script>
     var isBlocksURL = false; // PHP
@@ -83,337 +86,337 @@
   <script>if (window.module) module = window.module;</script>
   <style>
     .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      padding-top: 100px;
+      /* Location of the box */
       left: 75%;
       top: 0;
-      width: 25%; /* Full width */
-      height: 50%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-    } 
+      width: 25%;
+      /* Full width */
+      height: 50%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+    }
 
-  /* Modal Content */
-  .modal-content {
+    /* Modal Content */
+    .modal-content {
       background-color: #fefefe;
       margin: auto;
       padding: 20px;
       border: 1px solid #888;
       width: 80%;
-  }  
+    }
   </style>
 </head>
 
 <body>
 
-<div id="entire" style="z-index: 0">
-  <div id="left">
-    <div id="editorPane">
-      <div id="textEditor" class="mousetrap"></div>
-      <div id="blocksEditor">
-        <div id="blocksCanvas"></div>
+  <div id="entire" style="z-index: 0">
+    <div id="left">
+      <div id="editorPane">
+        <div id="textEditor" class="mousetrap"></div>
+        <div id="blocksEditor">
+          <div id="blocksCanvas"></div>
+        </div>
+      </div>
+      <div id="console">
+        <div id="message"></div>
       </div>
     </div>
-    <div id="console"><div id="message"></div></div>
-  </div>
 
-  <div id="glcanvas">
-    <div id="score" height="60">Score: 0</div>
-    <div id="myModal" class="modal">
-      <div id="modalText" class="modal-content">Missões Concluidas</div>
-    </div>
-    <div id="toolbar">
-      <div class="quick-button" id="pathify-button" title="Pathify"><img src="images/pathify_icon.png" class="unselectable"></div>
-      <div class="quick-button" id="solidify-button" title="Solidify"><img src="images/solidify_icon.png" class="unselectable"></div>
-      <div class="quick-button" id="fit-button" title="Fit"><img src="images/fit.png" class="unselectable"></div>
-      <div class="quick-button" id="settings-button" title="Settings"><img src="images/gear.png" class="unselectable"></div>
-    </div>
-    <div id="info3"></div>
-    <div id="breakout">view on madeup.xyz</div>
-  </div>
-
-  <div id="right">
-    <div class="quick-button unselectable" id="close-settings-button" title="Close"><img src="images/close.png" class="unselectable"></div>
-
-    <ul id="settings">
-      <li id="panel-section-lesson">
-        <span class="panel-section-label unselectable">Lesson</span>
-        <div class="panel-section-content doccopy"></div>
-      </li>
-
-      <li id="panel-section-objects">
-        <span class="panel-section-label unselectable">Objects</span>
-        <div class="panel-section-content doccopy">
-          <div>
-            <legend>Nome do usuario</legend>
-            <img src="images/object1.png" style="width:60%;height:60%;">
-          </div>
-          <div>
-            <legend>Nome do usuario</legend>
-            <img src="images/object1.png" style="width:60%;height:60%;">
-          </div>
-          <div>
-            <legend>Nome do usuario</legend>
-            <img src="images/object1.png" style="width:60%;height:60%;">
-          </div>
-          <div>
-            <legend>Nome do usuario</legend>
-            <img src="images/object1.png" style="width:60%;height:60%;">
-          </div>
+    <div id="glcanvas">
+      <div id="score" height="60">Score: 0</div>
+      <div id="myModal" class="modal">
+        <div id="modalText" class="modal-content">Missões Concluidas</div>
+      </div>
+      <div id="toolbar">
+        <div class="quick-button" id="pathify-button" title="Pathify"><img src="images/pathify_icon.png"
+            class="unselectable"></div>
+        <div class="quick-button" id="solidify-button" title="Solidify"><img src="images/solidify_icon.png"
+            class="unselectable"></div>
+        <div class="quick-button" id="fit-button" title="Fit"><img src="images/fit.png" class="unselectable"></div>
+        <div class="quick-button" id="settings-button" title="Settings"><img src="images/gear.png" class="unselectable">
         </div>
-      </li>
-      <li id="panel-section-file">
-        <span class="panel-section-label unselectable">File</span>
-        <div class="panel-section-content">
-          <fieldset>
-            <legend>Save files</legend>
-            <div class="pretty circle primary">
-              <input type="radio" name="storage" id="storageLocal" value="local" checked="checked">
-              <label><i class="mdi mdi-check"></i> in browser</label>
-            </div><br>
-            <div class="pretty circle primary">
-              <input type="radio" name="storage" id="storageDrive" value="local" checked="checked">
-              <label><i class="mdi mdi-check"></i> on Google Drive</label>
+      </div>
+      <div id="info3"></div>
+      <div id="breakout">view on madeup.xyz</div>
+    </div>
+
+    <div id="right">
+      <div class="quick-button unselectable" id="close-settings-button" title="Close"><img src="images/close.png"
+          class="unselectable"></div>
+
+      <ul id="settings">
+        <li id="panel-section-lesson">
+          <span class="panel-section-label unselectable">Lesson</span>
+          <div class="panel-section-content doccopy"></div>
+        </li>
+
+        <li id="panel-section-objects">
+          <span class="panel-section-label unselectable">Objects</span>
+          <div class="panel-section-content doccopy">
+            <div id="list_users"></div>
+            <script>getListVote();</script>
+          </div>
+        </li>
+        <li id="panel-section-file">
+          <span class="panel-section-label unselectable">File</span>
+          <div class="panel-section-content">
+            <fieldset>
+              <legend>Save files</legend>
+              <div class="pretty circle primary">
+                <input type="radio" name="storage" id="storageLocal" value="local" checked="checked">
+                <label><i class="mdi mdi-check"></i> in browser</label>
+              </div><br>
+              <div class="pretty circle primary">
+                <input type="radio" name="storage" id="storageDrive" value="local" checked="checked">
+                <label><i class="mdi mdi-check"></i> on Google Drive</label>
+              </div>
+            </fieldset>
+            <div class="group">
+              <a href="#" id="fileSave" class="menu-link">Save</a><span id="dirty-suffix"></span><br>
+              <a href="#" id="fileSaveAs" class="menu-link">Save as...</a><br>
+              <a href="#" id="magic" class="menu-link">Send to Chris</a><br>
             </div>
-          </fieldset>
-          <div class="group">
-            <a href="#" id="fileSave" class="menu-link">Save</a><span id="dirty-suffix"></span><br>
-            <a href="#" id="fileSaveAs" class="menu-link">Save as...</a><br>
-            <a href="#" id="magic" class="menu-link">Send to Chris</a><br>
+            <div class="group">
+              <a href="#" id="fileClose" class="menu-link">Close</a><br>
+            </div>
+            <div class="group">
+              <a href="#" id="fileDelete" class="menu-link">Delete</a><br>
+            </div>
+            <div class="group">
+              <a href="#" id="exportOBJ" class="export3D menu-link">Export OBJ</a><br>
+              <a href="#" id="exportSTL" class="export3D menu-link">Export STL</a><br>
+              <a href="#" id="exportScreenshot" class="menu-link">Export screenshot</a><br>
+            </div>
+            <div id="archiver" class="group">
+              <a href="#" id="exportArchive" class="menu-link">Export archive</a><br>
+              <a href="#" id="importArchive" class="menu-link">Import archive</a><br>
+              <form id="importForm">
+                <input type="file" id="archive">
+                <a href="#" id="cancelImport" class="menu-link">Cancel import</a>
+              </form>
+            </div>
           </div>
-          <div class="group">
-            <a href="#" id="fileClose" class="menu-link">Close</a><br>
-          </div>
-          <div class="group">
-            <a href="#" id="fileDelete" class="menu-link">Delete</a><br>
-          </div>
-          <div class="group">
-            <a href="#" id="exportOBJ" class="export3D menu-link">Export OBJ</a><br>
-            <a href="#" id="exportSTL" class="export3D menu-link">Export STL</a><br>
-            <a href="#" id="exportScreenshot" class="menu-link">Export screenshot</a><br>
-          </div>
-          <div id="archiver" class="group">
-            <a href="#" id="exportArchive" class="menu-link">Export archive</a><br>
-            <a href="#" id="importArchive" class="menu-link">Import archive</a><br>
-            <form id="importForm">
-              <input type="file" id="archive">
-              <a href="#" id="cancelImport" class="menu-link">Cancel import</a>
-            </form>
-          </div>
-        </div>
-      </li>
+        </li>
 
-      <li id="panel-section-mups">
-        <span class="panel-section-label unselectable">Mups</span>
-        <div class="panel-section-content">
-          <fieldset>
-            <legend>Sort by</legend>
-            <div class="pretty circle primary">
-              <input type="radio" name="sortMupsBy" id="sortMupsByName" value="name" checked="checked">
-              <label><i class="mdi mdi-check"></i> name</label>
+        <li id="panel-section-mups">
+          <span class="panel-section-label unselectable">Mups</span>
+          <div class="panel-section-content">
+            <fieldset>
+              <legend>Sort by</legend>
+              <div class="pretty circle primary">
+                <input type="radio" name="sortMupsBy" id="sortMupsByName" value="name" checked="checked">
+                <label><i class="mdi mdi-check"></i> name</label>
+              </div><br>
+              <div class="pretty circle primary">
+                <input type="radio" name="sortMupsBy" id="sortMupsByDate" value="date">
+                <label><i class="mdi mdi-check"></i> date</label>
+              </div><br>
+            </fieldset>
+            <div id="mups"></div>
+          </div>
+        </li>
+
+        <li id="panel-section-editor">
+          <span class="panel-section-label unselectable">Editor</span>
+          <div class="panel-section-content">
+            <div>
+              Text size: <a href="#" id="smaller" class="menu-link">smaller</a> or <a href="#" id="bigger"
+                class="menu-link">bigger</a><br>
+            </div>
+
+            <div class="pretty primary">
+              <input type="checkbox" id="showConsole" checked>
+              <label><i class="mdi mdi-check"></i> Show console</label>
             </div><br>
-            <div class="pretty circle primary">
-              <input type="radio" name="sortMupsBy" id="sortMupsByDate" value="date">
-              <label><i class="mdi mdi-check"></i> date</label>
+
+            <fieldset>
+              <legend>Edit as</legend>
+              <div class="pretty circle primary">
+                <input type="radio" name="editorMode" id="isEditorText" value="Text" checked="checked">
+                <label><i class="mdi mdi-check"></i> text</label>
+              </div><br>
+              <div class="pretty circle primary">
+                <input type="radio" name="editorMode" id="isEditorBlocks" value="Blocks">
+                <label><i class="mdi mdi-check"></i> blocks</label>
+              </div><br>
+            </fieldset>
+
+            <fieldset>
+              <legend>Theme</legend>
+              <div class="pretty circle primary">
+                <input type="radio" name="theme" id="isDark" value="isDark" checked="checked">
+                <label><i class="mdi mdi-check"></i> dark</label>
+              </div><br>
+              <div class="pretty circle primary">
+                <input type="radio" name="theme" id="isLight" value="isLight">
+                <label><i class="mdi mdi-check"></i> light</label>
+              </div><br>
+            </fieldset>
+          </div>
+        </li>
+
+        <li id="panel-section-pathify">
+          <span class="panel-section-label unselectable">Pathify</span>
+          <div class="panel-section-content">
+            <div class="pretty primary">
+              <input type="checkbox" id="showHeadings" />
+              <label><i class="mdi mdi-check"></i> Show heading</label>
             </div><br>
-          </fieldset>
-          <div id="mups"></div>
-        </div>
-      </li>
 
-      <li id="panel-section-editor">
-        <span class="panel-section-label unselectable">Editor</span>
-        <div class="panel-section-content">
-          <div>
-            Text size: <a href="#" id="smaller" class="menu-link">smaller</a> or <a href="#" id="bigger" class="menu-link">bigger</a><br>
-          </div>
-
-          <div class="pretty primary">
-            <input type="checkbox" id="showConsole" checked>
-            <label><i class="mdi mdi-check"></i> Show console</label>
-          </div><br>
-
-          <fieldset>
-            <legend>Edit as</legend>
-            <div class="pretty circle primary">
-              <input type="radio" name="editorMode" id="isEditorText" value="Text" checked="checked">
-              <label><i class="mdi mdi-check"></i> text</label>
+            <div class="pretty primary">
+              <input type="checkbox" id="showPoints" />
+              <label><i class="mdi mdi-check"></i> Show vertices</label>
             </div><br>
-            <div class="pretty circle primary">
-              <input type="radio" name="editorMode" id="isEditorBlocks" value="Blocks">
-              <label><i class="mdi mdi-check"></i> blocks</label>
+
+            <div>
+              Vertex size <input type="number" min="0" max="1000" step="0.05" id="pathify-node-size">
+            </div>
+
+            <div>
+              Line size <input type="number" min="0" max="1000" step="0.5" id="pathify-line-size">
+            </div>
+
+            <div class="pretty primary">
+              <input type="checkbox" id="autopathify" checked="checked" />
+              <label><i class="mdi mdi-check"></i> Auto-pathify</label>
+            </div>
+
+            <div>
+              Authopathify delay <input type="text" id="nSecondsTillAutopathify" size="5" />
+            </div>
+          </div>
+        </li>
+
+        <li id="panel-section-solidify">
+          <span class="panel-section-label unselectable">Solidify</span>
+          <div class="panel-section-content">
+            <div>
+              Show
+              <select name="showMode" id="showMode">
+                <option value="solid" selected>Solid</option>
+                <option value="triangles">Triangles</option>
+                <option value="shaded_triangles">Shaded Triangles</option>
+                <option value="wireframe">Wireframe</option>
+              </select>
+            </div>
+            <div class="pretty primary">
+              <input type="checkbox" id="lightBothSides" checked="checked" />
+              <label><i class="mdi mdi-check"></i> Two-sided lighting</label>
             </div><br>
-          </fieldset>
-
-          <fieldset>
-            <legend>Theme</legend>
-            <div class="pretty circle primary">
-              <input type="radio" name="theme" id="isDark" value="isDark" checked="checked">
-              <label><i class="mdi mdi-check"></i> dark</label>
+            <div class="pretty primary">
+              <input type="checkbox" id="isFlatShaded">
+              <label><i class="mdi mdi-check"></i> Flat shading</label>
             </div><br>
-            <div class="pretty circle primary">
-              <input type="radio" name="theme" id="isLight" value="isLight">
-              <label><i class="mdi mdi-check"></i> light</label>
+            <div class="pretty primary">
+              <input type="checkbox" id="isSpecular">
+              <label><i class="mdi mdi-check"></i> Specular hightlights</label>
             </div><br>
-          </fieldset>
-        </div>
-      </li>
-
-      <li id="panel-section-pathify">
-        <span class="panel-section-label unselectable">Pathify</span>
-        <div class="panel-section-content">
-          <div class="pretty primary">
-            <input type="checkbox" id="showHeadings"/>
-            <label><i class="mdi mdi-check"></i> Show heading</label>
-          </div><br>
-
-          <div class="pretty primary">
-            <input type="checkbox" id="showPoints"/>
-            <label><i class="mdi mdi-check"></i> Show vertices</label>
-          </div><br>
-
-          <div>
-            Vertex size <input type="number" min="0" max="1000" step="0.05" id="pathify-node-size">
           </div>
+        </li>
 
-          <div>
-            Line size <input type="number" min="0" max="1000" step="0.5" id="pathify-line-size">
+        <li id="panel-section-camera">
+          <span class="panel-section-label unselectable">Camera</span>
+          <div class="panel-section-content">
+            <div class="pretty primary">
+              <input type="checkbox" id="isAutorotate">
+              <label><i class="mdi mdi-check"></i> Auto-rotate</label>
+            </div>
+
+            <div>
+              View From:
+              <a href="#" id="cameraLeft" class="menu-link">-X</a> <a href="#" id="cameraRight" class="menu-link">+X</a>
+              <a href="#" id="cameraBottom" class="menu-link">-Y</a> <a href="#" id="cameraTop" class="menu-link">+Y</a>
+              <a href="#" id="cameraBack" class="menu-link">-Z</a> <a href="#" id="cameraFront"
+                class="menu-link">+Z</a><br>
+            </div>
+
+            <div>
+              <a href="#" id="squareport" class="menu-link">Square Viewport</a>
+            </div>
           </div>
+        </li>
 
-          <div class="pretty primary">
-            <input type="checkbox" id="autopathify" checked="checked"/>
-            <label><i class="mdi mdi-check"></i> Auto-pathify</label>
+        <li id="panel-section-grid">
+          <span class="panel-section-label unselectable">Grid</span>
+          <div class="panel-section-content">
+            <div class="pretty primary">
+              <input type="checkbox" id="axisX">
+              <label><i class="mdi mdi-check"></i> X axis</label>
+            </div><br>
+            <div class="pretty primary">
+              <input type="checkbox" id="axisY">
+              <label><i class="mdi mdi-check"></i> Y axis</label>
+            </div><br>
+            <div class="pretty primary">
+              <input type="checkbox" id="axisZ">
+              <label><i class="mdi mdi-check"></i> Z axis</label>
+            </div><br>
+            <div class="pretty primary">
+              <input type="checkbox" id="gridX">
+              <label><i class="mdi mdi-check"></i> X = 0 plane</label>
+            </div><br>
+            <div class="pretty primary">
+              <input type="checkbox" id="gridY">
+              <label><i class="mdi mdi-check"></i> Y = 0 plane</label>
+            </div><br>
+            <div class="pretty primary">
+              <input type="checkbox" id="gridZ">
+              <label><i class="mdi mdi-check"></i> Z = 0 plane</label>
+            </div><br>
+            <input type="button" id="fitGrid" value="Fit to Model"><br>
+            Grid Extent: <input type="text" id="gridExtent" size="5" /><br>
+            Grid Spacing: <input type="text" id="gridSpacing" size="5" /><br>
           </div>
+        </li>
 
-          <div>
-            Authopathify delay <input type="text" id="nSecondsTillAutopathify" size="5"/>
+        <li id="panel-section-tutorial">
+          <span class="panel-section-label unselectable">Tutorial</span>
+          <!-- Keep empty so that index loads on first expansion. -->
+          <div class="panel-section-content doccopy"></div>
+        </li>
+
+        <li id="panel-section-about">
+          <span class="panel-section-label unselectable">About</span>
+          <div class="panel-section-content">
+            <a href="#" id="docs" class="menu-link">Documentation</a><br>
+            <a href="#" id="github" class="menu-link">Source Code</a><br>
+            <a href="mailto:crjjrc@gmail.com" id="email" class="menu-link">Email Us</a><br>
           </div>
-        </div>
-      </li>
+        </li>
+      </ul>
+    </div>
 
-      <li id="panel-section-solidify">
-        <span class="panel-section-label unselectable">Solidify</span>
-        <div class="panel-section-content">
-          <div>
-            Show
-            <select name="showMode" id="showMode">
-              <option value="solid" selected>Solid</option> 
-              <option value="triangles">Triangles</option> 
-              <option value="shaded_triangles">Shaded Triangles</option> 
-              <option value="wireframe">Wireframe</option> 
-            </select>
-          </div>
-          <div class="pretty primary">
-            <input type="checkbox" id="lightBothSides" checked="checked"/>
-            <label><i class="mdi mdi-check"></i> Two-sided lighting</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="isFlatShaded">
-            <label><i class="mdi mdi-check"></i> Flat shading</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="isSpecular">
-            <label><i class="mdi mdi-check"></i> Specular hightlights</label>
-          </div><br>
-        </div>
-      </li>
-
-      <li id="panel-section-camera">
-        <span class="panel-section-label unselectable">Camera</span>
-        <div class="panel-section-content">
-          <div class="pretty primary">
-            <input type="checkbox" id="isAutorotate">
-            <label><i class="mdi mdi-check"></i> Auto-rotate</label>
-          </div>
-
-          <div>
-            View From:
-            <a href="#" id="cameraLeft" class="menu-link">-X</a> <a href="#" id="cameraRight" class="menu-link">+X</a>
-            <a href="#" id="cameraBottom" class="menu-link">-Y</a> <a href="#" id="cameraTop" class="menu-link">+Y</a>
-            <a href="#" id="cameraBack" class="menu-link">-Z</a> <a href="#" id="cameraFront" class="menu-link">+Z</a><br>
-          </div>
-
-          <div>
-            <a href="#" id="squareport" class="menu-link">Square Viewport</a>
-          </div>
-        </div>
-      </li>
-
-      <li id="panel-section-grid">
-        <span class="panel-section-label unselectable">Grid</span>
-        <div class="panel-section-content">
-          <div class="pretty primary">
-            <input type="checkbox" id="axisX">
-            <label><i class="mdi mdi-check"></i> X axis</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="axisY">
-            <label><i class="mdi mdi-check"></i> Y axis</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="axisZ">
-            <label><i class="mdi mdi-check"></i> Z axis</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="gridX">
-            <label><i class="mdi mdi-check"></i> X = 0 plane</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="gridY">
-            <label><i class="mdi mdi-check"></i> Y = 0 plane</label>
-          </div><br>
-          <div class="pretty primary">
-            <input type="checkbox" id="gridZ">
-            <label><i class="mdi mdi-check"></i> Z = 0 plane</label>
-          </div><br>
-          <input type="button" id="fitGrid" value="Fit to Model"><br>
-          Grid Extent: <input type="text" id="gridExtent" size="5"/><br>
-          Grid Spacing: <input type="text" id="gridSpacing" size="5"/><br>
-        </div>
-      </li>
-
-      <li id="panel-section-tutorial">
-        <span class="panel-section-label unselectable">Tutorial</span>
-        <!-- Keep empty so that index loads on first expansion. -->
-        <div class="panel-section-content doccopy"></div>
-      </li>
-
-      <li id="panel-section-about">
-        <span class="panel-section-label unselectable">About</span>
-        <div class="panel-section-content">
-          <a href="#" id="docs" class="menu-link">Documentation</a><br>
-          <a href="#" id="github" class="menu-link">Source Code</a><br>
-          <a href="mailto:crjjrc@gmail.com" id="email" class="menu-link">Email Us</a><br>
-          <a href="#" id="privacy" class="menu-link">Privacy Policy</a><br>
-        </div>
-      </li>
-    </ul>
+    <!-- PHP:KEYSTROKES -->
   </div>
 
-  <!-- PHP:KEYSTROKES -->
-</div>
+  <!-- Hidden Download Form _________________________________________________ -->
+  <form id="downloader" style="display: none">
+    <input id="extension" type="text" value="obj" name="extension" />
+    <input id="tag" type="text" value="model" name="tag" />
+    <input id="geometry_mode" type="text" value="SURFACE" name="geometry_mode" />
+    <input id="shading_mode" type="text" value="SMOOTH" name="shading_mode" />
+    <input id="timestamp" type="text" name="timestamp" />
+    <textarea id="source" name="source"></textarea>
+  </form>
 
-<!-- Hidden Download Form _________________________________________________ -->
-<form id="downloader" style="display: none">
-  <input id="extension" type="text" value="obj" name="extension"/>
-  <input id="tag" type="text" value="model" name="tag"/>
-  <input id="geometry_mode" type="text" value="SURFACE" name="geometry_mode"/>
-  <input id="shading_mode" type="text" value="SMOOTH" name="shading_mode"/>
-  <input id="timestamp" type="text" name="timestamp"/>
-  <textarea id="source" name="source"></textarea>
-</form>
+  <form id="breakout-form" action="https://madeup.xyz" method="post" target="_blank">
+    <input name="src" type="hidden">
+    <input name="runonload" type="hidden" value="true">
+    <input name="embed" type="hidden" value="false">
+  </form>
 
-<form id="breakout-form" action="https://madeup.xyz" method="post" target="_blank">
-  <input name="src" type="hidden">
-  <input name="runonload" type="hidden" value="true">
-  <input name="embed" type="hidden" value="false">
-</form>
-
-<!-- Source Loader ________________________________________________________ -->
-<script>
+  <!-- Source Loader ________________________________________________________ -->
+  <script>
 // SRC:PHP
-</script>
+  </script>
 
   <!-- The Blockly toolbox __________________________________________________ -->
   <xml id="toolbox" style="display: none">
@@ -560,4 +563,5 @@
 
 
 </body>
+
 </html>
