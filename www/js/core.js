@@ -48,7 +48,7 @@ var lastBlocks = null;
 var badModelMessage = 'Uh oh. I tried to generate a model for you, but it is broken. This can happen for a bunch of reasons: some faces may be too small, some vertices may be duplicated, and the mesh boolean operations may just be fickle.';
 var isAutoSolidify = false;
 var axes = [null, null, null];
-var missionDone = [0,0,0,0,0,0];
+
 
 function hasWebGL() {
   try {
@@ -1922,7 +1922,6 @@ function onInterpret(data) {
         document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando variaveis globais!";
         if(data['missions'][2]==1){
           document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando condicionais!";
-          missionDone[2] = 1;
           if(data['missions'][3]==1){
             document.getElementById("modalText").innerHTML = "Missão concluída: Objeto criado utilizando laços!";
             if(data['missions'][4]==1){
@@ -1960,8 +1959,9 @@ function voteObject(user){
       alert("Voto registrado com sucesso");
       console.log(msg);
     },
-    error: function(){
+    error: function(msg){
       alert("Falha ao registrar voto");
+      console.log(msg);
     },
   });
 }
@@ -1973,7 +1973,8 @@ function getListVote(){
     for(var i = 0; i < json.length; i++){
       var user = json[i];
       if(user != sessionID){
-        var image = 'saves/'+ json[i] +'.png';
+        var d = new Date(); 
+        var image = 'saves/' + json[i] + '.png?' + d.getMilliseconds();;
         text += '<div><legend>';
         text += user;
         text += '</legend>';
@@ -1986,6 +1987,34 @@ function getListVote(){
 
     document.getElementById("list_users").innerHTML = text;
 
+  });
+}
+
+function getScoreAux(){
+  getScore(sessionID);
+}
+
+function getScore(user){
+  var formData = new FormData();
+  formData.append('name', user);
+  $.ajax({
+    type: 'POST',
+    url: 'getScore.php',
+    data: formData,
+    contentType: false,
+    cache: false,
+    processData:false, 
+    success: function(data){
+      txtScore = "Score: ";
+      console.log(typeof(data));
+      if(data == ''){
+        data = 0;
+      }
+      document.getElementById('score').innerHTML = txtScore + data;   
+    },
+    error: function(data){
+      console.log("Falha ao obter o placar", data);
+    },
   });
 }
 
