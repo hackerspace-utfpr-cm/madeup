@@ -1,7 +1,5 @@
 <?php
 
-$use_minified = true;
-
 $html = file_get_contents('index.html');
 
 if (array_key_exists('embed', $_REQUEST) && strcmp($_REQUEST['embed'], 'true') == 0) {
@@ -36,11 +34,6 @@ function comment($matches) {
 function uncomment($matches) {
   $lines = preg_replace('/<!--\s*(.*?)\s*-->/m', '\\1', $matches[0]);
   return $lines;
-}
-
-if ($use_minified) {
-  $html = preg_replace_callback("/(?<=<!-- Unminified -->\n).*?(?=^\s*<!-- \/Unminified -->)/ms", 'comment', $html);
-  $html = preg_replace_callback("/(?<=<!-- Minified -->\n).*?(?=^\s*<!-- \/Minified -->)/ms", 'uncomment', $html);
 }
 
 $html = str_replace('var madeupPrefix = \'http://madeup.xyz\'; // PHP', "var madeupPrefix = '.';", $html);
