@@ -2,7 +2,7 @@ JS = $(addprefix js/,text_to_blocks.js core.js keystrokes.js)
 CSS = $(addprefix css/,ide_skin.css ide_skin_dark.css ide_skin_light.css)
 IMAGES = $(addprefix images/,favicon-16x16.png favicon-32x32.png pathify_icon.png solidify_icon.png fit.png gear.png close.png)
 PRIVACY = $(addprefix privacy/,index.html)
-SRC = forn index.php translate.php save.php snapshot.php interpret.php count.php insert.php database.php dbMissions.php mission1.php mission2.php mission3.php mission4.php mission5.php mission6.php missions.php selectActions.php selectUnique.php selectInsert.php selectMissions.php selectPlayers.php getScore.php vote.php getListUser.php screenshot.php index.html bridge.js $(JS) $(CSS) $(IMAGES) $(PRIVACY)
+SRC = forn index.php translate.php save.php snapshot.php interpret.php count.php insert.php database.php dbMissions.php selectActions.php selectUnique.php selectInsert.php selectPlayers.php getScore.php vote.php getListUser.php screenshot.php index.html bridge.js $(JS) $(CSS) $(IMAGES) $(PRIVACY)
 DST = $(addprefix $(WWW_ROOT)/, $(SRC))
 DEPS = ace gapi.js three-js jquery.js js-cookie jquery-ui blockly closure-library filesaver jquery_ui_touch_punch mousetrap meshline
 JQUERY_UI_VERSION = 1.12.1
@@ -94,8 +94,8 @@ $(WWW_ROOT)/repos/mousetrap:
 	$(SUDO) chmod -R g+rX $@
 
 $(WWW_ROOT)/deps.min.js: $(addprefix $(WWW_ROOT)/,repos/gapi.js repos/jquery.js repos/jquery-ui/jquery-ui.js repos/jquery_ui_touch_punch/jquery.ui.touch-punch.js repos/js-cookie/src/js.cookie.js repos/mousetrap/mousetrap.min.js repos/three-js/build/three.js repos/three-js/examples/js/controls/TrackballControls.js repos/meshline/src/THREE.MeshLine.js repos/filesaver/src/FileSaver.js repos/ace/src-noconflict/ace.js js/text_to_blocks.js js/core.js bridge.js)
-	@echo uglifying...
-	cd $(WWW_ROOT) && $(SUDO) uglifyjs $^ > $@
+#	@echo uglifying...
+#	cd $(WWW_ROOT) && $(SUDO) uglifyjs $^ > $@
 	$(SUDO) chmod g+r $@
 
 $(WWW_ROOT)/mode-madeup.js:
