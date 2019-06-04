@@ -1,4 +1,6 @@
 <?php
+include("config.php");
+
 $json = file_get_contents("php://input");
 $in = json_decode($json, true);
 
@@ -8,7 +10,7 @@ $id = $in['id'];
 $source = $in['source'];
 #$lesson = $in['lesson'];
 
-$outpath = sprintf("/var/www/madeup/saves/%s_%s_snap", $timestamp, $id);
+$outpath = sprintf($ROOT . "saves/%s_%s_snap", $timestamp, $id);
 //file_put_contents($outpath, $source);
 //echo "Arquivo escrito em $outpath.";
 ?>

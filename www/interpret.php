@@ -1,4 +1,5 @@
 <?php
+include("config.php");
 require_once('database.php');
 error_reporting(E_ALL);
 
@@ -138,7 +139,7 @@ if (strcmp($in['extension'], 'json') != 0 &&
         date_default_timezone_set('America/Sao_Paulo');
         $timestamp = date('d_m_Y_H_i_s');
     
-        $outpath = sprintf("/var/www/madeup/saves/%s_model.json", $timestamp);
+        $outpath = sprintf($ROOT . "saves/%s_model.json", $timestamp);
         $jsonData = json_encode($out);
         file_put_contents($outpath, $jsonData);
     

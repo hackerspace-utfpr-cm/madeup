@@ -1,4 +1,5 @@
 <?php
+include("config.php");
 require_once('dbMissions.php');
 $dbM = New MissionsDB();
 
@@ -82,7 +83,7 @@ $obj->id = $json_a['id'];
 $obj->qty_commands = $qty_commands;
 $obj->qty_faces = sizeof($faces_a);
 
-$countpath = sprintf("/var/www/madeup/saves/%s_count.json", $timestamp);
+$countpath = sprintf($ROOT . "saves/%s_count.json", $timestamp);
 $json_b = json_encode($obj);
 file_put_contents($countpath, $json_b);
 
